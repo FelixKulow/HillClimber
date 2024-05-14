@@ -3,6 +3,8 @@
 Created on Wed Apr 26 14:59:48 2023
 
 @author: ThomasKopsch
+
+bearbeitet von Felix Kulow
 """
 
 import pandas as pd

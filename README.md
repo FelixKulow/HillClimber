@@ -1,1 +1,3 @@
 # HillClimber
+
+Autor: FElix Kulow

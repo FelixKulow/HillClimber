@@ -48,13 +48,14 @@ def getDistance(cityA, cityB):
 #########################################################
 
 # Example: The distance between Berlin (1) and Hamburg (2)
-print(f"The distance between Berlin and Hamburg is {getDistance(1,2)}km.")
+# print(f"The distance between Berlin and Hamburg is {getDistance(1,2)}km.")
 
 
 def getTotalDistance(path): # Definition von "getTotalDistance"
     TotalDistance = 0 # Die gesamte Distanz wird gleich 0 gesetzt
     for i in range(len(path)-1): # Mit range wird der Bereich definiert, aus welchen Stätdten die Distanz errechnet werden soll, da wir die gesamte Distanz errechnen wollen Benötigen wir auch die gesamte liste von insgesamt 80 Einträgen.
         TotalDistance += getDistance(path[i], path[i+1]) # Durch die Vaariable i können wir alle Positionen nacheinander aufaddieren.
+         TotalDistance += getDistance(path[-1], path[0]) # Plus die Distanz von der letzten Stadt zur ersten Stadt, da es eine Rundreise sein soll (Durch -1 wird das letzte Element aus der liste verwendet, durch die 0 das erste)
     return TotalDistance 
 
 initialPath = list(range(1,81))

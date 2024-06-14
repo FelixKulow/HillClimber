@@ -78,7 +78,7 @@ def hillClimber(InitialPath, MaxIterations=10000):
         if NewDistance < CurrentDistance: # Wenn die neue Distanz kleiner ist, als die aktuelle wird der aktuelle Pfad mit dem neuen Überschrieben
             CurrentPath = NewPath
             CurrentDistance = NewDistance
-            print(f"Strecke der neuen besten Reiseroute: {CurrentDistance}Km") # Output über die neue beste Strecke. So wird sichtbar, dass der Code wirklich am "arbeiten" ist
+            print(f"Iteration {Iteration}: Strecke der neuen besten Reiseroute: {CurrentDistance}Km") # Output über die neue beste Strecke. So wird sichtbar, dass der Code wirklich am "arbeiten" ist
             
     return CurrentPath, CurrentDistance # Gibt den besten gefundenen Pfad und seine Gesamtdistanz zurück
 

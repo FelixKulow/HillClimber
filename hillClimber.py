@@ -58,10 +58,30 @@ def getTotalDistance(path): # Definition von "getTotalDistance"
          TotalDistance += getDistance(path[-1], path[0]) # Plus die Distanz von der letzten Stadt zur ersten Stadt, da es eine Rundreise sein soll (Durch -1 wird das letzte Element aus der liste verwendet, durch die 0 das erste)
     return TotalDistance 
 
-initialPath = list(range(1,81))
-print(f"Die gesamte Distanz aus der unsorterten Liste beträgt {getTotalDistance( initialPath)} Km") # Ausgabe der unsortierten gesamten Distanz
+InitialPath = list(range(1,81)) #Erstellung einer List mit den 80 Städten aus der Excel Datei 
+print(f"Die gesamte Distanz aus der unsorterten Liste beträgt {getTotalDistance( InitialPath)} Km") # Ausgabe der unsortierten gesamten Distanz
 
+def swapCities(path): # Definition der Funktion "swapCities" zum Vertauschen zweier zufälliger Städte im Pfad
+    New_path = path.copy() # Erstellung einer Kopie, um den "swap" vorzunehmen, und als neuen Path zu speichern
+    City1, City2 = random.sample(range(len(path)), 2) # Auswahl von zwei Städten die getauscht werden sollen
+    New_path[City1], New_path[City2] = New_path[City2], New_path[City1] # Tausch der Städte im Pfad
+    return New_path # Ausgabe des neuen Pfades
 
+def hillClimber(InitialPath, MaxIterations=10000):
+    CurrentPath = InitialPath # Gleichsetzen vom aktuellen Pfad und dem ursprünglichen Pfad
+    CurrentDistance = getTotalDistance(CurrentPath) # Ausrechnen von der Gesamtstrecke des unsortieren Pfades
+    
+    for Iteration in range(MaxIterations):
+        NewPath = swapCities(CurrentPath) # Erzeugung eines neuen Pfades, indem Städte vertauscht werden
+        NewDistance = getTotalDistance(NewPath) # Berechnung der neuen Distanz
+        
+        if NewDistance < CurrentDistance: # Wenn die neue Distanz kleiner ist, als die aktuelle wird der aktuelle Pfad mit dem neuen Überschrieben
+            CurrentPath = NewPath
+            CurrentDistance = NewDistance
+            print(f"Strecke der neuen besten Reiseroute: {CurrentDistance}Km") # Output über die neue beste Strecke. So wird sichtbar, dass der Code wirklich am "arbeiten" ist
+            
+    return CurrentPath, CurrentDistance # Gibt den besten gefundenen Pfad und seine Gesamtdistanz zurück
 
-
-
+BestPath, BestDistance = hillClimber(InitialPath) # Ausführung vonm Hill-Climbing-Algorithmus , um die beste Route zu finden
+print(f"Die Gesamtstecke für die beste Gefundene Rundreise beläuft sich auf {BestDistance} Km") # Ausgabe der Gesamtdistanz der besten Route
+print(f"Die optimierte Route ist lautet wie folgt: {BestPath}") # Ausgabe der besten gefundenen Routen
